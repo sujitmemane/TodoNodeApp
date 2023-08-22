@@ -6,17 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="">
+   
         <input id="title" type="text" /><label for="title">Todo Title</label>
         <br>
         <input id="description" type="text" /><label for="description">Todo Descripion</label>
       <button onclick="fetchTodos()">
         Send Todo
       </button>
-    </form>
+      <div id="todos">
+
+      </div>
+    
 
 </body>
 <script>
+ 
+ const todos = document.querySelector('#todos')
+
+const loadASAPFn = async()=>{
+  const response = await fetch('http://localhost:3000/todos')
+  const data =await response.json()
+  console.log(data)
+  todos.innerHTML=data
+ }
+loadASAPFn()
+
+
 function log(data) {
     console.log(data);
 }
@@ -28,7 +43,14 @@ function responseFn(res) {
 function fetchTodos() {
  
     fetch('http://localhost:3000/todos', {
-        method: 'GET'
+        method: 'POST',
+        body: JSON.stringify({
+          title:'Go To Gym',
+          description:"Go at 7'0 Clock"
+        }) ,
+        headers:{
+          "Content-Type":'application/json'
+        }
     }).then(responseFn);
 }
 </script>
