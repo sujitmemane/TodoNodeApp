@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <input id="title" type="text" /><label for="title">Todo Title</label>
+        <br>
+        <input id="description" type="text" /><label for="description">Todo Descripion</label>
+      <button onclick="fetchTodos()">
+        Send Todo
+      </button>
+    </form>
+
+</body>
+<script>
+function log(data) {
+    console.log(data);
+}
+
+function responseFn(res) {
+    res.json().then(log);
+}
+
+function fetchTodos() {
+ 
+    fetch('http://localhost:3000/todos', {
+        method: 'GET'
+    }).then(responseFn);
+}
+</script>
+</html>
